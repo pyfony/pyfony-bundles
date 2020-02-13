@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "pyfony-bundles"
 version = "0.2.0"
-description = "Pyfony Framworkd bundles base package"
+description = "Pyfony Framwork bundles base package"
 readme = "README.md"
 repository = "https://github.com/DataSentics/pyfony-bundles"
 
