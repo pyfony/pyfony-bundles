@@ -2,7 +2,7 @@ from typing import List
 from box import Box
 from injecta.compiler.CompilerPassInterface import CompilerPassInterface
 from injecta.container.ContainerInterface import ContainerInterface
-from injecta.definition.Definition import Definition
+from injecta.service.Service import Service
 
 class Bundle:
 
@@ -15,8 +15,8 @@ class Bundle:
     def modifyRawConfig(self, rawConfig: dict) -> dict:
         return rawConfig
 
-    def modifyServices(self, definitions: List[Definition]):
-        return definitions
+    def modifyServices(self, services: List[Service]):
+        return services
 
     def modifyParameters(self, parameters: Box) -> Box:
         return parameters

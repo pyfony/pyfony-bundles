@@ -1,11 +1,11 @@
-import importlib.util
 from pathlib import Path
 from typing import List
 from box import Box
 from injecta.compiler.CompilerPassInterface import CompilerPassInterface
 from injecta.config.ConfigLoader import ConfigLoader
 from injecta.config.ConfigMerger import ConfigMerger
-from injecta.definition.Definition import Definition
+from injecta.service.Service import Service
+from injecta.package.pathResolver import resolvePath
 from pyfonybundles.Bundle import Bundle
 
 class BundleManager:
@@ -28,12 +28,9 @@ class BundleManager:
 
         for bundle in self.__bundles:
             rootModuleName = bundle.__module__[:bundle.__module__.find('.')]
-            baseModuleSpec = importlib.util.find_spec(rootModuleName)
-            configBasePath = baseModuleSpec.submodule_search_locations._path[0] + '/_config' # pylint: disable = protected-access
+            configBasePath = resolvePath(rootModuleName) + '/_config'
 
-            configFileNames = bundle.getConfigFiles()
-
-            for configFileName in configFileNames:
+            for configFileName in bundle.getConfigFiles():
                 configFilePath = Path(configBasePath + '/' + configFileName)
                 newConfig = self.__configLoader.load(configFilePath)
 
@@ -47,11 +44,11 @@ class BundleManager:
 
         return rawConfig
 
-    def modifyServices(self, definitions: List[Definition]):
+    def modifyServices(self, services: List[Service]):
         for bundle in self.__bundles:
-            definitions = bundle.modifyServices(definitions)
+            services = bundle.modifyServices(services)
 
-        return definitions
+        return services
 
     def modifyParameters(self, parameters: Box) -> Box:
         for bundle in self.__bundles:

@@ -26,5 +26,8 @@ packages = [
 [tool.poetry.dependencies]
 python = "~3.7.3"
 tomlkit = "0.5.*"
-injecta = "0.5.*"
+injecta = "0.6.*"
 python-box = "3.4.*"
+
+[tool.poetry.dev-dependencies]
+pylint = "2.4.*"
