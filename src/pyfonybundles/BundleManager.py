@@ -38,6 +38,18 @@ class BundleManager:
 
         return self.__configMerger.merge(config, appRawConfig)
 
+    def loadProjectBundlesConfig(self, rawConfig: dict, bundlesConfigsDir: str):
+        for bundle in self.__bundles:
+            rootPackageName = bundle.__module__[:bundle.__module__.find('.')]
+            projectBundleConfigPath = Path(bundlesConfigsDir + '/' + rootPackageName + '.yaml')
+
+            if projectBundleConfigPath.exists():
+                projectBundleConfig = self.__configLoader.load(projectBundleConfigPath)
+
+                rawConfig = self.__configMerger.merge(rawConfig, projectBundleConfig)
+
+        return rawConfig
+
     def modifyRawConfig(self, rawConfig: dict) -> dict:
         for bundle in self.__bundles:
             rawConfig = bundle.modifyRawConfig(rawConfig)
