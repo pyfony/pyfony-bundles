@@ -23,7 +23,13 @@ class BundleManager:
 
         return compilerPasses
 
+    # @deprecated, to be removed in 0.3
     def mergeRawConfig(self, appRawConfig: dict) -> dict:
+        config = self.getBundlesConfig()
+
+        return self.__configMerger.merge(config, appRawConfig)
+
+    def getBundlesConfig(self) -> dict:
         config = dict()
 
         for bundle in self.__bundles:
@@ -36,9 +42,17 @@ class BundleManager:
 
                 config = self.__configMerger.merge(config, newConfig, False)
 
-        return self.__configMerger.merge(config, appRawConfig)
+        return config
 
+    # @deprecated, to be removed in 0.3
     def loadProjectBundlesConfig(self, rawConfig: dict, bundlesConfigsDir: str):
+        config = self.getProjectBundlesConfig(bundlesConfigsDir)
+
+        return self.__configMerger.merge(config, rawConfig)
+
+    def getProjectBundlesConfig(self, bundlesConfigsDir: str) -> dict:
+        config = dict()
+
         for bundle in self.__bundles:
             rootPackageName = bundle.__module__[:bundle.__module__.find('.')]
             projectBundleConfigPath = Path(bundlesConfigsDir + '/' + rootPackageName + '.yaml')
@@ -46,9 +60,9 @@ class BundleManager:
             if projectBundleConfigPath.exists():
                 projectBundleConfig = self.__configLoader.load(projectBundleConfigPath)
 
-                rawConfig = self.__configMerger.merge(rawConfig, projectBundleConfig)
+                config = self.__configMerger.merge(config, projectBundleConfig)
 
-        return rawConfig
+        return config
 
     def modifyRawConfig(self, rawConfig: dict) -> dict:
         for bundle in self.__bundles:
