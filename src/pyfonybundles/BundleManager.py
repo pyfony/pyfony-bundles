@@ -6,6 +6,7 @@ from injecta.config.ConfigLoader import ConfigLoader
 from injecta.config.ConfigMerger import ConfigMerger
 from injecta.service.Service import Service
 from injecta.package.pathResolver import resolvePath
+from injecta.service.ServiceAlias import ServiceAlias
 from pyfonybundles.Bundle import Bundle
 
 class BundleManager:
@@ -58,11 +59,11 @@ class BundleManager:
 
         return rawConfig
 
-    def modifyServices(self, services: List[Service]):
+    def modifyServices(self, services: List[Service], aliases: List[ServiceAlias], parameters: Box):
         for bundle in self.__bundles:
-            services = bundle.modifyServices(services)
+            services, aliases = bundle.modifyServices(services, aliases, parameters)
 
-        return services
+        return services, aliases
 
     def modifyParameters(self, parameters: Box) -> Box:
         for bundle in self.__bundles:
