@@ -23,12 +23,6 @@ class BundleManager:
 
         return compilerPasses
 
-    # @deprecated, to be removed in 0.3
-    def mergeRawConfig(self, appRawConfig: dict) -> dict:
-        config = self.getBundlesConfig()
-
-        return self.__configMerger.merge(config, appRawConfig)
-
     def getBundlesConfig(self) -> dict:
         config = dict()
 
@@ -43,12 +37,6 @@ class BundleManager:
                 config = self.__configMerger.merge(config, newConfig, False)
 
         return config
-
-    # @deprecated, to be removed in 0.3
-    def loadProjectBundlesConfig(self, rawConfig: dict, bundlesConfigsDir: str):
-        config = self.getProjectBundlesConfig(bundlesConfigsDir)
-
-        return self.__configMerger.merge(config, rawConfig)
 
     def getProjectBundlesConfig(self, bundlesConfigsDir: str) -> dict:
         config = dict()
