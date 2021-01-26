@@ -1,5 +1,5 @@
 from typing import List
-from injecta.dtype.classLoader import loadClass
+from injecta.module import attributeLoader
 from pyfonybundles.Bundle import Bundle
 from pyfonybundles.loader import entryPointsReader, pyprojectReader
 
@@ -41,20 +41,8 @@ def _loadDirectly(rawConfig):
     for name, val in entryPoints.items():
         _checkName(name, val)
 
-    return _parse(entryPoints['create'])
+    return attributeLoader.loadFromString(entryPoints['create'])
 
 def _checkName(name: str, value):
     if name != 'create':
         raise Exception(f'Unexpected entry point name "{name}" for {value}')
-
-def _parse(val):
-    moduleName, classAndMethod = val.split(':')
-
-    if '.' not in classAndMethod:
-        return loadClass(moduleName, classAndMethod)
-
-    className, functionName = classAndMethod.split('.')
-
-    class_ = loadClass(moduleName, className) # pylint: disable = invalid-name
-
-    return getattr(class_, functionName)

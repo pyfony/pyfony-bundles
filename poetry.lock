@@ -38,16 +38,16 @@ testing = ["pytest (>=3.5,!=3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake
 
 [[package]]
 name = "injecta"
-version = "0.9.0"
+version = "0.9.3"
 description = "Dependency Injection Container Library"
 category = "main"
 optional = false
-python-versions = ">=3.7.3,<3.8.0"
+python-versions = ">=3.7,<4.0"
 
 [package.dependencies]
-python-box = ">=3.4.0,<3.5.0"
-PyYAML = ">=5.1.0,<5.2.0"
-tomlkit = ">=0.5.8,<0.6.0"
+python-box = ">=3.4,<4.0"
+PyYAML = ">=5.1,<6.0"
+tomlkit = ">=0.5.8,<1.0.0"
 
 [[package]]
 name = "isort"
@@ -167,7 +167,7 @@ testing = ["pytest (>=3.5,!=3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "560d2e0e2393c08e06c28bec1af0ba82d61b929c759d7320c1fc253676f0f46c"
+content-hash = "06afcacf6637e9e25b910b2b29dda21ac89233ab2cd7c96f27da1b1f431a4604"
 
 [metadata.files]
 astroid = [
@@ -183,7 +183,8 @@ importlib-metadata = [
     {file = "importlib_metadata-3.4.0.tar.gz", hash = "sha256:fa5daa4477a7414ae34e95942e4dd07f62adf589143c875c133c1e53c4eff38d"},
 ]
 injecta = [
-    {file = "injecta-0.9.0-py3-none-any.whl", hash = "sha256:99b29b4327b68e487009ecf504f5718108ed2369912a68ca4f3b564d41d46bcb"},
+    {file = "injecta-0.9.3-py3-none-any.whl", hash = "sha256:31a4b239e491049c8503f321b59b9632229cff8a286106f8e75c5058c54aa952"},
+    {file = "injecta-0.9.3.tar.gz", hash = "sha256:6a601e470e405debf69f6e11a8d55f59d01ed4dd4eb2be2b6495878830c235c7"},
 ]
 isort = [
     {file = "isort-4.3.21-py2.py3-none-any.whl", hash = "sha256:6e811fcb295968434526407adb8796944f1988c5b65e8139058f2014cbe100fd"},
