@@ -5,21 +5,21 @@ from injecta.container.ContainerInterface import ContainerInterface
 from injecta.service.Service import Service
 from injecta.service.ServiceAlias import ServiceAlias
 
+
 class Bundle:
+    def get_config_files(self):
+        return ["config.yaml"]
 
-    def getConfigFiles(self):
-        return ['config.yaml']
-
-    def getCompilerPasses(self) -> List[CompilerPassInterface]:
+    def get_compiler_passes(self) -> List[CompilerPassInterface]:
         return []
 
-    def modifyRawConfig(self, rawConfig: dict) -> dict:
-        return rawConfig
+    def modify_raw_config(self, raw_config: dict) -> dict:
+        return raw_config
 
-    def modifyServices(self, services: List[Service], aliases: List[ServiceAlias], parameters: Box): # pylint: disable = unused-argument
+    def modify_services(self, services: List[Service], aliases: List[ServiceAlias], parameters: Box):
         return services, aliases
 
-    def modifyParameters(self, parameters: Box) -> Box:
+    def modify_parameters(self, parameters: Box) -> Box:
         return parameters
 
     def boot(self, container: ContainerInterface):
