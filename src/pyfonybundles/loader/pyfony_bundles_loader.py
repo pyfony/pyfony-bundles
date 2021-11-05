@@ -14,7 +14,20 @@ def get_entry_points():
 
 
 def load_bundles() -> List[Bundle]:
-    return [entry_point.load()() for entry_point in get_entry_points()]
+    bundles = []
+    bundle_fqns = set()
+
+    for entry_point in get_entry_points():
+        bundle_class = entry_point.load()
+        bundle_fqn = bundle_class.__module__ + "." + bundle_class.__name__
+
+        if bundle_fqn in bundle_fqns:
+            raise Exception(f"Multiple installations of bundle {bundle_fqn} found in your environment")
+
+        bundles.append(bundle_class())
+        bundle_fqns.add(bundle_fqn)
+
+    return bundles
 
 
 def load_bundles_with_current() -> List[Bundle]:
