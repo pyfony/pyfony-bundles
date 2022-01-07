@@ -7,4 +7,4 @@ else:
 
 
 def get_by_key(key: str):
-    return importlib_metadata.entry_points().get(key, ())
+    return importlib_metadata.entry_points().select(group=key)
